@@ -8,11 +8,14 @@ public class MoveShip : MonoBehaviour {
     public float verticalRotSpeed = 1.0f;
     public float turnRotSpeed = 50.0f;
     public float engineForceStep = 5f;
+    public float maxZrotation, stepZRotation;
     public float airResistance, mass, frictionCoeff;
     public float speed, engineForce, maxSpeed;
-    private float currentHeight, currentAngle, rotationStep, currentTurnAngle;
+    private float currentHeight, currentAngle, rotationStep, currentTurnAngle, zRotation;
 
     private bool subir, subirMorro;
+
+
 
 
     // Use this for initialization
@@ -22,12 +25,10 @@ public class MoveShip : MonoBehaviour {
         subirMorro = false;
         currentAngle = 0f;
         currentTurnAngle = 0f;
-        gameObject.transform.Rotate(-currentAngle, 0f, 0f);
+        //gameObject.transform.Rotate(0f, 0f, 20f);
         speed =  0;
         engineForce = 0;
-        
-
-
+        zRotation = 0;
     }
 
     // Update is called once per frame
@@ -60,18 +61,29 @@ public class MoveShip : MonoBehaviour {
 
         // giro
         float turnStep = turnRotSpeed * Time.deltaTime;
+        float zStep = stepZRotation * Time.deltaTime;
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            currentTurnAngle += turnStep;
-            transform.Rotate(0f, turnStep, 0f);
+            
+  
+            
+            zRotation -= stepZRotation;
+            if (zRotation < -maxZrotation) zRotation = -maxZrotation;
+            if (zRotation > -maxZrotation)
+                transform.Rotate(0f, 0f, -stepZRotation);
         }
         else if (Input.GetKey(KeyCode.LeftArrow))
         {
-            currentTurnAngle -= turnStep;
-            transform.Rotate(0f, -turnStep, 0f);
+            
+
+            
+            zRotation += stepZRotation;
+            if (zRotation > maxZrotation) zRotation = maxZrotation;
+            if (zRotation < maxZrotation)
+                transform.Rotate(0f, 0f, stepZRotation);
         }
 
-        if (currentAngle >= 360f) currentAngle -= 360f;
+
 
         // aceleracion
         if (Input.GetKey(KeyCode.UpArrow))
@@ -87,32 +99,48 @@ public class MoveShip : MonoBehaviour {
 
 
         if (speed < 0) { speed = 0;  engineForce = 0; }
+        
+
+        
+        Debug.Log("angulo y " + gameObject.transform.rotation.y);
         gameObject.transform.Translate(0.0f, 0.0f, speed * Time.deltaTime);
+        //gameObject.transform.RotateAround(Vector3.up, Time.deltaTime * zRotation / 10);
 
 
 
-
+        /*
         if (subir) gameObject.transform.Translate(0f, +0.03f, 0f);
         else gameObject.transform.Translate(0f, -0.03f, 0f);
-
+        */
         
                 
     }
 
     void FixedUpdate()
     {
-        
-
 
         // este esta en el centro de la nave
+
         Ray ray = new Ray(transform.position, -transform.up);       
         RaycastHit hit;
-        subir = Physics.Raycast(ray, out hit, maxHeight);
-        Debug.DrawLine(ray.origin, hit.point);
+        if (Physics.Raycast(ray, out hit, 200f))
+        {
+            gameObject.transform.position =  new Vector3(gameObject.transform.position.x, hit.transform.position.y + maxHeight, gameObject.transform.position.z);
+            //gameObject.transform.rotation = Quaternion.Euler(hit.tra, 0f , zRotation);
+
+            //gameObject.transform.rotation = hit.transform.rotation;
+            gameObject.transform.RotateAround(hit.transform.up,  - Time.deltaTime*Time.deltaTime * zRotation );
+            
+            // + hit.transform.rotation.eulerAngles.z
+
+            Debug.DrawLine(ray.origin, hit.point);
+        }
+        
 
         // morro nave
+        /*
         Vector3 posNave = new Vector3(0f, 0f, 8f);
-        Quaternion rotation = Quaternion.Euler(0f, currentTurnAngle, 0f);
+        Quaternion rotation = Quaternion.Euler(0f, currentTurnAngle, zRotation);
         posNave = rotation*posNave;
         posNave += transform.position;
         Ray rayHead = new Ray(posNave, -transform.up);
@@ -120,11 +148,12 @@ public class MoveShip : MonoBehaviour {
 
         subirMorro = Physics.Raycast(rayHead, out hitMorro,maxHeight);
         Debug.DrawLine(rayHead.origin, hitMorro.point, Color.red);
-
+        
         // corrijo la actual rotacion respecto el eje Y
+        
         Vector3 rotationAux = hitMorro.transform.rotation.eulerAngles;
         rotationAux.y = currentTurnAngle;
         transform.rotation = Quaternion.Euler(rotationAux);
-        
+        */
     }
 }
