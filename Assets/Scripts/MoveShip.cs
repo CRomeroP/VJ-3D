@@ -104,16 +104,16 @@ public class MoveShip : MonoBehaviour {
         
         Debug.Log("angulo y " + gameObject.transform.rotation.y);
         gameObject.transform.Translate(0.0f, 0.0f, speed * Time.deltaTime);
+ 
         //gameObject.transform.RotateAround(Vector3.up, Time.deltaTime * zRotation / 10);
-
 
 
         /*
         if (subir) gameObject.transform.Translate(0f, +0.03f, 0f);
         else gameObject.transform.Translate(0f, -0.03f, 0f);
         */
-        
-                
+
+
     }
 
     void FixedUpdate()
@@ -125,13 +125,12 @@ public class MoveShip : MonoBehaviour {
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 200f))
         {
+            float currentYRotation = gameObject.transform.rotation.eulerAngles.y;
             gameObject.transform.position =  new Vector3(gameObject.transform.position.x, hit.transform.position.y + maxHeight, gameObject.transform.position.z);
-            //gameObject.transform.rotation = Quaternion.Euler(hit.tra, 0f , zRotation);
 
-            //gameObject.transform.rotation = hit.transform.rotation;
-            gameObject.transform.RotateAround(hit.transform.up,  - Time.deltaTime*Time.deltaTime * zRotation );
-            
-            // + hit.transform.rotation.eulerAngles.z
+            gameObject.transform.rotation = Quaternion.Euler(hit.transform.rotation.x, currentYRotation, hit.transform.rotation.z);
+            gameObject.transform.Rotate(0f, 0f, zRotation);
+            gameObject.transform.RotateAround(hit.transform.up, -Time.deltaTime * Time.deltaTime * zRotation);
 
             Debug.DrawLine(ray.origin, hit.point);
         }
