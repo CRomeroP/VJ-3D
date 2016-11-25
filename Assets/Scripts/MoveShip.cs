@@ -121,38 +121,43 @@ public class MoveShip : MonoBehaviour {
 
         // este esta en el centro de la nave
 
-        Ray ray = new Ray(transform.position, -transform.up);       
+        Ray ray = new Ray(transform.position, -transform.up);
         RaycastHit hit;
+        float currentYRotation = gameObject.transform.rotation.eulerAngles.y;
         if (Physics.Raycast(ray, out hit, 200f))
         {
-            float currentYRotation = gameObject.transform.rotation.eulerAngles.y;
-            gameObject.transform.position =  new Vector3(gameObject.transform.position.x, hit.transform.position.y + maxHeight, gameObject.transform.position.z);
 
-            gameObject.transform.rotation = Quaternion.Euler(hit.transform.rotation.x, currentYRotation, hit.transform.rotation.z);
+            gameObject.transform.position = new Vector3(gameObject.transform.position.x, hit.transform.position.y + maxHeight, gameObject.transform.position.z);
+
+            gameObject.transform.rotation = Quaternion.Euler(hit.transform.rotation.eulerAngles.x, currentYRotation, hit.transform.rotation.eulerAngles.z);
             gameObject.transform.Rotate(0f, 0f, zRotation);
             gameObject.transform.RotateAround(hit.transform.up, -Time.deltaTime * Time.deltaTime * zRotation);
 
             Debug.DrawLine(ray.origin, hit.point);
         }
-        
+
 
         // morro nave
-        /*
+
         Vector3 posNave = new Vector3(0f, 0f, 8f);
-        Quaternion rotation = Quaternion.Euler(0f, currentTurnAngle, zRotation);
-        posNave = rotation*posNave;
+        Quaternion rotation = Quaternion.Euler(0f, currentYRotation, zRotation);
+        posNave = rotation * posNave;
         posNave += transform.position;
         Ray rayHead = new Ray(posNave, -transform.up);
         RaycastHit hitMorro;
 
-        subirMorro = Physics.Raycast(rayHead, out hitMorro,maxHeight);
-        Debug.DrawLine(rayHead.origin, hitMorro.point, Color.red);
-        
-        // corrijo la actual rotacion respecto el eje Y
-        
-        Vector3 rotationAux = hitMorro.transform.rotation.eulerAngles;
-        rotationAux.y = currentTurnAngle;
-        transform.rotation = Quaternion.Euler(rotationAux);
+        /*
+        if (Physics.Raycast(rayHead, out hitMorro, maxHeight))
+        {
+            Debug.DrawLine(rayHead.origin, hitMorro.point, Color.red);
+
+            // corrijo la actual rotacion respecto el eje Y
+
+            Vector3 rotationAux = hitMorro.transform.rotation.eulerAngles;
+            rotationAux.y = currentYRotation;
+            transform.rotation = Quaternion.Euler(rotationAux);
+
+        }
         */
     }
 }
