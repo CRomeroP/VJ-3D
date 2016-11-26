@@ -25,7 +25,7 @@ public class MoveShip : MonoBehaviour {
         subirMorro = false;
         currentAngle = 0f;
         currentTurnAngle = 0f;
-        //gameObject.transform.Rotate(0f, 0f, 20f);
+        gameObject.transform.Rotate(0f, 0f, 0f);
         speed =  0;
         engineForce = 0;
         zRotation = 0;
@@ -103,15 +103,10 @@ public class MoveShip : MonoBehaviour {
 
         
         Debug.Log("angulo y " + gameObject.transform.rotation.y);
-        gameObject.transform.Translate(0.0f, 0.0f, speed * Time.deltaTime);
+
+        gameObject.transform.position += transform.forward*speed * Time.deltaTime;
  
-        //gameObject.transform.RotateAround(Vector3.up, Time.deltaTime * zRotation / 10);
-
-
-        /*
-        if (subir) gameObject.transform.Translate(0f, +0.03f, 0f);
-        else gameObject.transform.Translate(0f, -0.03f, 0f);
-        */
+        
 
 
     }
@@ -124,28 +119,29 @@ public class MoveShip : MonoBehaviour {
         Ray ray = new Ray(transform.position, -transform.up);
         RaycastHit hit;
         float currentYRotation = gameObject.transform.rotation.eulerAngles.y;
-        if (Physics.Raycast(ray, out hit, 200f))
+        
+        if (Physics.Raycast(ray, out hit, 1000f))
         {
-
-            gameObject.transform.position = new Vector3(gameObject.transform.position.x, hit.transform.position.y + maxHeight, gameObject.transform.position.z);
-
+         
+            gameObject.transform.position = new Vector3(hit.point.x, hit.point.y, hit.point.z);
+            gameObject.transform.position += transform.up * maxHeight;
             gameObject.transform.rotation = Quaternion.Euler(hit.transform.rotation.eulerAngles.x, currentYRotation, hit.transform.rotation.eulerAngles.z);
             gameObject.transform.Rotate(0f, 0f, zRotation);
             gameObject.transform.RotateAround(hit.transform.up, -Time.deltaTime * Time.deltaTime * zRotation);
-
-            Debug.DrawLine(ray.origin, hit.point);
+            
+            Debug.DrawLine(ray.origin, hit.point, Color.red);
         }
-
+        
 
         // morro nave
-
+        /*
         Vector3 posNave = new Vector3(0f, 0f, 8f);
         Quaternion rotation = Quaternion.Euler(0f, currentYRotation, zRotation);
         posNave = rotation * posNave;
         posNave += transform.position;
         Ray rayHead = new Ray(posNave, -transform.up);
         RaycastHit hitMorro;
-
+        */
         /*
         if (Physics.Raycast(rayHead, out hitMorro, maxHeight))
         {
