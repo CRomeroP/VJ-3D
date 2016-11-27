@@ -17,8 +17,12 @@ public class MoveShip : MonoBehaviour {
 
 
 
+    void OnCollisionEnter(Collision collision)
+    {
 
-    // Use this for initialization
+        Debug.Log("He colisionado en ...");
+    }
+        // Use this for initialization
     void Start () {
         currentHeight = maxHeight;
         subir = false;
@@ -29,6 +33,7 @@ public class MoveShip : MonoBehaviour {
         speed =  0;
         engineForce = 0;
         zRotation = 0;
+        gameObject.transform.Find("Sparks").GetComponent<ParticleSystem>().Stop();
     }
 
     // Update is called once per frame
@@ -101,13 +106,17 @@ public class MoveShip : MonoBehaviour {
         if (speed < 0) { speed = 0;  engineForce = 0; }
         
 
-        
-        Debug.Log("angulo y " + gameObject.transform.rotation.y);
-
         gameObject.transform.position += transform.forward*speed * Time.deltaTime;
  
         
-
+        if (Input.GetKey(KeyCode.P))
+        {
+            gameObject.transform.Find("Sparks").GetComponent<ParticleSystem>().Play();
+        }
+        else
+        {
+            gameObject.transform.Find("Sparks").GetComponent<ParticleSystem>().Stop();
+        }
 
     }
 
