@@ -591,10 +591,10 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010988686998}
-  m_LocalRotation: {x: -0, y: -0.68673027, z: -0, w: 0.7269124}
-  m_LocalPosition: {x: 8.7, y: 2.87, z: 1.57}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.26, y: 2.87, z: 1.57}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: -86.838005, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 4000011496817258}
   - {fileID: 4000012504393244}
@@ -817,7 +817,7 @@ ParticleSystem:
   moveWithTransform: 0
   autoRandomSeed: 1
   scalingMode: 2
-  randomSeed: 1838812316
+  randomSeed: 260885387
   InitialModule:
     serializedVersion: 2
     enabled: 1
@@ -2546,7 +2546,7 @@ ParticleSystem:
   moveWithTransform: 1
   autoRandomSeed: 1
   scalingMode: 2
-  randomSeed: -1754432249
+  randomSeed: -1530878056
   InitialModule:
     serializedVersion: 2
     enabled: 1

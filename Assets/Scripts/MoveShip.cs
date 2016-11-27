@@ -14,12 +14,27 @@ public class MoveShip : MonoBehaviour {
     private float currentHeight, currentAngle, rotationStep, currentTurnAngle, zRotation;
 
     private bool subir, subirMorro;
-
+    private ParticleSystem spark;
 
 
     void OnCollisionEnter(Collision collision)
     {
+        // TODO: pueden suceder diversas colisiones a la vez -> factoria de sparks?
+        //       
+        foreach (ContactPoint contact in collision.contacts)
+        {
+            // lo que se tiene q hacer
+            // las chispas salen de la nave, no de la pared
+            // en ese caso hay q mirar los puntos de colision y ver el angulo en el q estan respecto el centro de la nave
+            // alejar del centro una determinada distancia (dependiendo del angulo la distancia no sera la misma (ej. derecha/izq, delante/atras)
+            // con ese angulo orientar las chispas
 
+
+            // reproducir sonido de choque
+            Vector3 aux = contact.point;
+            spark.transform.position = aux;
+            if (!spark.isPlaying) spark.Play();
+        }
         Debug.Log("He colisionado en ...");
     }
         // Use this for initialization
@@ -33,7 +48,8 @@ public class MoveShip : MonoBehaviour {
         speed =  0;
         engineForce = 0;
         zRotation = 0;
-        gameObject.transform.Find("Sparks").GetComponent<ParticleSystem>().Stop();
+        spark = gameObject.transform.Find("Sparks").GetComponent<ParticleSystem>();
+        spark.Stop();
     }
 
     // Update is called once per frame
@@ -107,16 +123,9 @@ public class MoveShip : MonoBehaviour {
         
 
         gameObject.transform.position += transform.forward*speed * Time.deltaTime;
+        // TODO: cambiar pitch de ruido motor segun las revoluciones de este
  
         
-        if (Input.GetKey(KeyCode.P))
-        {
-            gameObject.transform.Find("Sparks").GetComponent<ParticleSystem>().Play();
-        }
-        else
-        {
-            gameObject.transform.Find("Sparks").GetComponent<ParticleSystem>().Stop();
-        }
 
     }
 
