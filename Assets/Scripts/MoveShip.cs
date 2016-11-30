@@ -156,28 +156,5 @@ public class MoveShip : MonoBehaviour {
             Debug.DrawLine(ray.origin, hit.point, Color.red);
         }
         
-
-        // morro nave
-        /*
-        Vector3 posNave = new Vector3(0f, 0f, 8f);
-        Quaternion rotation = Quaternion.Euler(0f, currentYRotation, zRotation);
-        posNave = rotation * posNave;
-        posNave += transform.position;
-        Ray rayHead = new Ray(posNave, -transform.up);
-        RaycastHit hitMorro;
-        */
-        /*
-        if (Physics.Raycast(rayHead, out hitMorro, maxHeight))
-        {
-            Debug.DrawLine(rayHead.origin, hitMorro.point, Color.red);
-
-            // corrijo la actual rotacion respecto el eje Y
-
-            Vector3 rotationAux = hitMorro.transform.rotation.eulerAngles;
-            rotationAux.y = currentYRotation;
-            transform.rotation = Quaternion.Euler(rotationAux);
-
-        }
-        */
     }
 }
