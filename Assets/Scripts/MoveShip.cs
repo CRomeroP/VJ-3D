@@ -11,7 +11,7 @@ public class MoveShip : MonoBehaviour {
     public float maxZrotation, stepZRotation;
     public float airResistance, mass, frictionCoeff;
     public float speed, engineForce, maxSpeed;
-    private float currentHeight, currentAngle, rotationStep, currentTurnAngle, zRotation;
+    private float currentHeight, currentAngle, rotationStep, currentTurnAngle, zRotation, currentYRotation;
 
     private bool subir, subirMorro;
     private ParticleSystem spark;
@@ -50,6 +50,7 @@ public class MoveShip : MonoBehaviour {
         zRotation = 0;
         spark = gameObject.transform.Find("Sparks").GetComponent<ParticleSystem>();
         spark.Stop();
+        currentYRotation = 0;
     }
 
     // Update is called once per frame
@@ -123,9 +124,10 @@ public class MoveShip : MonoBehaviour {
         
 
         gameObject.transform.position += transform.forward*speed * Time.deltaTime;
+        currentYRotation += -Time.deltaTime * zRotation;
         // TODO: cambiar pitch de ruido motor segun las revoluciones de este
- 
-        
+
+
 
     }
 
@@ -136,17 +138,21 @@ public class MoveShip : MonoBehaviour {
 
         Ray ray = new Ray(transform.position, -transform.up);
         RaycastHit hit;
-        float currentYRotation = gameObject.transform.rotation.eulerAngles.y;
+        //float currentYRotation = gameObject.transform.rotation.eulerAngles.y;
         
         if (Physics.Raycast(ray, out hit, 1000f))
         {
          
             gameObject.transform.position = new Vector3(hit.point.x, hit.point.y, hit.point.z);
             gameObject.transform.position += transform.up * maxHeight;
-            gameObject.transform.rotation = Quaternion.Euler(hit.transform.rotation.eulerAngles.x, currentYRotation, hit.transform.rotation.eulerAngles.z);
-            gameObject.transform.Rotate(0f, 0f, zRotation);
-            gameObject.transform.RotateAround(hit.transform.up, -Time.deltaTime * Time.deltaTime * zRotation);
+ 
+            gameObject.transform.up = hit.normal;
+
+            // importante el orden
+            gameObject.transform.Rotate(0f, currentYRotation, 0f);
+            gameObject.transform.Rotate(0f,0f, zRotation);
             
+
             Debug.DrawLine(ray.origin, hit.point, Color.red);
         }
         
