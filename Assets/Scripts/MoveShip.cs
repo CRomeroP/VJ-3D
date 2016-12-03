@@ -13,9 +13,13 @@ public class MoveShip : MonoBehaviour {
     public float speed, engineForce, maxSpeed;
     private float currentHeight, currentAngle, rotationStep, currentTurnAngle, zRotation, currentYRotation;
 
+
+
     private bool subir, subirMorro;
     private ParticleSystem spark;
 
+    private bool hasMissile;
+    public Object missile;
 
     void OnCollisionEnter(Collision collision)
     {
@@ -51,9 +55,15 @@ public class MoveShip : MonoBehaviour {
         spark = gameObject.transform.Find("Sparks").GetComponent<ParticleSystem>();
         spark.Stop();
         currentYRotation = 0;
+        hasMissile = true;
     }
 
     // Update is called once per frame
+
+    void createMissile()
+    {
+
+    }
     void Update()
     {
         // fuerzas de friccion del motor (afectan a la fuerza del motor)
@@ -119,9 +129,17 @@ public class MoveShip : MonoBehaviour {
             if (speed > 100) engineForce -= engineForceStep * Time.deltaTime;
         }
 
+        if (Input.GetKey(KeyCode.Space) && hasMissile)
+        {
+            hasMissile = false;
+            Vector3 offset = transform.forward * 30;
+            GameObject obj = (GameObject)Instantiate(missile, transform.position + offset, transform.rotation);
+        }
+
 
         if (speed < 0) { speed = 0;  engineForce = 0; }
-        
+
+        if (Input.GetKey(KeyCode.R)) hasMissile = true;
 
         gameObject.transform.position += transform.forward*speed * Time.deltaTime;
         currentYRotation += -Time.deltaTime * zRotation;
