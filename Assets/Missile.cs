@@ -5,16 +5,21 @@ using System.Collections;
 public class Missile : MonoBehaviour {
     public float missileVelocity, maxHeight;
     private float currentY;
+    public GameObject explosion;
 	// Use this for initialization
 	void Start () {
         currentY = transform.eulerAngles.y;
-        Destroy(gameObject, 5f);
-	}
+        Destroy(gameObject, 20f);
+        Debug.Log("Hola en ...");
+    }
 	
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("He colisionado en ...");
+        GameObject obj = (GameObject)Instantiate(explosion, collision.transform.position, collision.transform.rotation);
+        Debug.Log("Misil He colisionado en ...");
+        Destroy(gameObject);
     }
+
     void Update()
     {
         gameObject.transform.position += transform.forward * missileVelocity * Time.deltaTime;
