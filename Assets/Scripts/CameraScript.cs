@@ -3,13 +3,21 @@ using System.Collections;
 
 public class CameraScript : MonoBehaviour {
 
-    public Transform player;
+    public GameObject player;
+    private Vector3 offset;
 
 	// Update is called once per frame
+
+    void Start()
+    {
+        offset = transform.position - player.transform.position;
+
+    }
 	void LateUpdate ()
     {
-        transform.position = new Vector3(0, player.position.y + 4, player.position.z-15);
-        transform.rotation = player.rotation;
-        transform.Rotate(0f, -player.eulerAngles.y, 0f);
-	}
+        
+        transform.position = player.transform.position + offset;
+        transform.LookAt(player.transform.position);
+
+    }
 }
