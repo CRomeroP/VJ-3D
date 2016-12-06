@@ -158,7 +158,7 @@ public class MoveShip : MonoBehaviour {
         RaycastHit hit;
         //float currentYRotation = gameObject.transform.rotation.eulerAngles.y;
         
-        if (Physics.Raycast(ray, out hit, 1000f))
+        if (Physics.Raycast(ray, out hit, 1000f) && hit.transform.tag != "muro")
         {
          
             gameObject.transform.position = new Vector3(hit.point.x, hit.point.y, hit.point.z);

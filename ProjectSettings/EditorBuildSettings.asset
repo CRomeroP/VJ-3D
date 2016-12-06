@@ -4,4 +4,16 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Menu.unity
+  - enabled: 1
+    path: Assets/Scenes/CircuitoPruebas.unity
+  - enabled: 0
+    path: Assets/Scenes/Inicial.unity
+  - enabled: 0
+    path: Assets/Scenes/probandoCircuito.unity
+  - enabled: 0
+    path: Assets/Scenes/Circuito.unity
+  - enabled: 0
+    path: Assets/testParents.unity
