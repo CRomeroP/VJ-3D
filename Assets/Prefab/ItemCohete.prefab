@@ -36,6 +36,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000012667799920}
+  - 114: {fileID: 114000012050963266}
   m_Layer: 0
   m_Name: ItemCohete
   m_TagString: Untagged
@@ -54,7 +55,6 @@ GameObject:
   - 33: {fileID: 33000010683038830}
   - 65: {fileID: 65000013002780734}
   - 23: {fileID: 23000011722938460}
-  - 114: {fileID: 114000012306016630}
   m_Layer: 0
   m_Name: BaldosaCohete
   m_TagString: baldosaCohete
@@ -146,8 +146,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000014103750364}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 6.1, z: 0}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
   m_Children:
   - {fileID: 4000011233310768}
@@ -250,15 +250,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114000012306016630
+--- !u!114 &114000012050963266
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012197597784}
+  m_GameObject: {fileID: 1000012150053702}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18968a37f71b41947a4b94c76a6ac500, type: 3}
+  m_Script: {fileID: 11500000, guid: 353cbdef9b439d04f919a3b945f5b149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114000013396499940
@@ -322,7 +322,7 @@ ParticleSystem:
   moveWithTransform: 1
   autoRandomSeed: 1
   scalingMode: 2
-  randomSeed: 2132998214
+  randomSeed: -1688347703
   InitialModule:
     serializedVersion: 2
     enabled: 1
@@ -2041,7 +2041,7 @@ ParticleSystem:
   moveWithTransform: 1
   autoRandomSeed: 1
   scalingMode: 2
-  randomSeed: -826292243
+  randomSeed: 267780229
   InitialModule:
     serializedVersion: 2
     enabled: 1
@@ -2197,8 +2197,19 @@ ParticleSystem:
       maxColor: {r: 1, g: 0.44313726, b: 0.14117648, a: 1}
       minMaxState: 1
     startSize:
-      scalar: 4
+      scalar: 6
       maxCurve:
+        serializedVersion: 2
+        m_Curve:
+        - time: 0
+          value: 0.6666667
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 0
+      minCurve:
         serializedVersion: 2
         m_Curve:
         - time: 0
@@ -2208,18 +2219,7 @@ ParticleSystem:
           tangentMode: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
-        m_RotationOrder: 4
-      minCurve:
-        serializedVersion: 2
-        m_Curve:
-        - time: 0
-          value: 0.5
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
+        m_RotationOrder: 0
       minMaxState: 3
     startSizeY:
       scalar: 1

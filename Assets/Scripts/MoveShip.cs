@@ -220,5 +220,9 @@ public class MoveShip : MonoBehaviour {
         {
             if (hit.collider.GetComponent<BaldosaScript>().usar()) modifyEnergy(20);
         }
+        else if (hit.transform.tag == "baldosaCohete")
+        {
+            if (hit.collider.transform.parent.GetComponent<BaldosaCoheteScript>().usar()) addRocket();
+        }
     }
 }
