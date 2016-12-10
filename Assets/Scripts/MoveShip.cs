@@ -181,7 +181,7 @@ public class MoveShip : MonoBehaviour {
 
         if (speed < 0) { speed = 0;  engineForce = 0; }
 
-        if (Input.GetKey(KeyCode.R)) hasMissile = true;
+        if (Input.GetKey(KeyCode.R)) addRocket();
 
         gameObject.transform.position += transform.forward*speed * Time.deltaTime;
         currentYRotation += -Time.deltaTime * zRotation;
@@ -200,7 +200,8 @@ public class MoveShip : MonoBehaviour {
         RaycastHit hit;
         //float currentYRotation = gameObject.transform.rotation.eulerAngles.y;
         
-        if (Physics.Raycast(ray, out hit, 1000f) && hit.transform.tag != "muro")
+
+        if (Physics.Raycast(ray, out hit, 1000f) && hit.transform.tag != "muro" && hit.transform.tag != "baldosaEnergia")
         {
          
             gameObject.transform.position = new Vector3(hit.point.x, hit.point.y, hit.point.z);
@@ -215,6 +216,9 @@ public class MoveShip : MonoBehaviour {
 
             Debug.DrawLine(ray.origin, hit.point, Color.red);
         }
-        
+        if (hit.transform.tag == "baldosaEnergia")
+        {
+            if (hit.collider.GetComponent<BaldosaScript>().usar()) modifyEnergy(20);
+        }
     }
 }

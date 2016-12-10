@@ -6,6 +6,7 @@ TagManager:
   tags:
   - muro
   - misil
+  - baldosaEnergia
   layers:
   - Default
   - TransparentFX

@@ -91,6 +91,48 @@ NavMeshSettings:
     cellSize: 0.16666667
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &1343089
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 682968686}
+    m_Modifications:
+    - target: {fileID: 4000012602898250, guid: c0902de9c8cd2454393871e8daba3743, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012602898250, guid: c0902de9c8cd2454393871e8daba3743, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 5.63
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012602898250, guid: c0902de9c8cd2454393871e8daba3743, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -102.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012602898250, guid: c0902de9c8cd2454393871e8daba3743, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012602898250, guid: c0902de9c8cd2454393871e8daba3743, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012602898250, guid: c0902de9c8cd2454393871e8daba3743, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012602898250, guid: c0902de9c8cd2454393871e8daba3743, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012602898250, guid: c0902de9c8cd2454393871e8daba3743, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: c0902de9c8cd2454393871e8daba3743, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &3997778
 GameObject:
   m_ObjectHideFlags: 0
@@ -399,6 +441,35 @@ MonoBehaviour:
   m_Spacing: 20
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
+--- !u!1 &682968685
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 682968686}
+  m_Layer: 0
+  m_Name: BaldosasENergia
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &682968686
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 682968685}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children:
+  - {fileID: 1975900743}
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
 --- !u!1001 &715110752
 Prefab:
   m_ObjectHideFlags: 0
@@ -763,7 +834,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1116199836}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fca3fa48144c6e49b0db019fb660b7c, type: 3}
+  m_Script: {fileID: 11500000, guid: 239a6388cbb8ffa468c8c6e9cfa43b3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nave: {fileID: 1073975700}
@@ -1130,6 +1201,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
+--- !u!4 &1975900743 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4000012602898250, guid: c0902de9c8cd2454393871e8daba3743,
+    type: 2}
+  m_PrefabInternal: {fileID: 1343089}
 --- !u!1 &1986558463
 GameObject:
   m_ObjectHideFlags: 0
