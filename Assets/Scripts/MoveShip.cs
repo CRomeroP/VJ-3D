@@ -11,7 +11,7 @@ public class MoveShip : MonoBehaviour {
     public float maxZrotation, stepZRotation;
     public float airResistance, mass, frictionCoeff;
     public float speed, engineForce, maxSpeed, energy;
-    private float currentHeight, currentAngle, rotationStep, currentTurnAngle, zRotation, currentYRotation, energyCooldown;
+    private float currentHeight, currentAngle, rotationStep, currentTurnAngle, zRotation, currentYRotation, energyCooldown, explosionCooldown;
 
 
 
@@ -62,7 +62,12 @@ public class MoveShip : MonoBehaviour {
             }
             else
             {
-                modifyEnergy(-20);
+              
+                if (explosionCooldown <= 0f)
+                {
+                    modifyEnergy(-20);
+                    explosionCooldown = 0.3f;
+                }
             }
         }
         Debug.Log("He colisionado en ...");
@@ -83,7 +88,8 @@ public class MoveShip : MonoBehaviour {
         currentYRotation = 0;
         hasMissile = true;
         energy = 100f;
-        energyCooldown = 0.5f;
+        energyCooldown = 0f;
+        explosionCooldown = 0f;
     }
 
     // Update is called once per frame
@@ -95,7 +101,7 @@ public class MoveShip : MonoBehaviour {
     void Update()
     {
         energyCooldown -= Time.deltaTime;
-       
+        explosionCooldown -= Time.deltaTime;
         // fuerzas de friccion del motor (afectan a la fuerza del motor)
         float engineFrictionForce = frictionCoeff*speed; 
         if (engineForce > 0)
