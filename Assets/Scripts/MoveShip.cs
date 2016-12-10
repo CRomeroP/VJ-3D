@@ -11,8 +11,9 @@ public class MoveShip : MonoBehaviour {
     public float maxZrotation, stepZRotation;
     public float airResistance, mass, frictionCoeff;
     public float speed, engineForce, maxSpeed, energy;
-    private float currentHeight, currentAngle, rotationStep, currentTurnAngle, zRotation, currentYRotation, energyCooldown, explosionCooldown;
-
+    private float currentHeight, currentAngle, rotationStep, currentTurnAngle, zRotation, currentYRotation, energyCooldown, explosionCooldown, rocketLaunchCooldown;
+    public int currentRockets;
+    public int maxRockets = 2;
 
 
     private bool subir, subirMorro;
@@ -90,18 +91,21 @@ public class MoveShip : MonoBehaviour {
         energy = 100f;
         energyCooldown = 0f;
         explosionCooldown = 0f;
+        currentRockets = 0;
+        rocketLaunchCooldown = 0f;
     }
 
-    // Update is called once per frame
-
-    void createMissile()
+    private void addRocket()
     {
-
+        if (currentRockets < maxRockets) currentRockets += 1;
     }
+
     void Update()
     {
         energyCooldown -= Time.deltaTime;
         explosionCooldown -= Time.deltaTime;
+        rocketLaunchCooldown -= Time.deltaTime;
+
         // fuerzas de friccion del motor (afectan a la fuerza del motor)
         float engineFrictionForce = frictionCoeff*speed; 
         if (engineForce > 0)
@@ -165,11 +169,13 @@ public class MoveShip : MonoBehaviour {
             if (speed > 100) engineForce -= engineForceStep * Time.deltaTime;
         }
 
-        if (Input.GetKey(KeyCode.Space) && hasMissile)
+        if (Input.GetKey(KeyCode.Space) && rocketLaunchCooldown <= 0f && currentRockets > 0)
         {
             hasMissile = false;
             Vector3 offset = transform.forward * 30;
             GameObject obj = (GameObject)Instantiate(missile, transform.position + offset, transform.rotation);
+            currentRockets -= 1;
+            rocketLaunchCooldown = 0.5f;
         }
 
 
