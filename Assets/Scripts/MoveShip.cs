@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityEngine.SceneManagement;
 public class MoveShip : MonoBehaviour {
 	
     public float turnSpeed = 5.0f;
@@ -10,8 +10,8 @@ public class MoveShip : MonoBehaviour {
     public float engineForceStep = 5f;
     public float maxZrotation, stepZRotation;
     public float airResistance, mass, frictionCoeff;
-    public float speed, engineForce, maxSpeed;
-    private float currentHeight, currentAngle, rotationStep, currentTurnAngle, zRotation, currentYRotation;
+    public float speed, engineForce, maxSpeed, energy;
+    private float currentHeight, currentAngle, rotationStep, currentTurnAngle, zRotation, currentYRotation, energyCooldown;
 
 
 
@@ -21,6 +21,19 @@ public class MoveShip : MonoBehaviour {
     private bool hasMissile;
     public Object missile;
 
+    // factor: + - cantidad.
+
+    private void endGame()
+    {
+        SceneManager.LoadScene(2);
+    }
+    private void modifyEnergy(int factor)
+    {
+        energy += factor;
+        if (energy > 100f) energy = 100f;
+        else if (energy <= 0f) endGame();
+        
+    }
     void OnCollisionEnter(Collision collision)
     {
         // TODO: pueden suceder diversas colisiones a la vez -> factoria de sparks?
@@ -35,9 +48,22 @@ public class MoveShip : MonoBehaviour {
 
 
             // reproducir sonido de choque
-            Vector3 aux = contact.point;
-            spark.transform.position = aux;
-            if (!spark.isPlaying) spark.Play();
+            if (collision.gameObject.tag != "misil")
+            {
+                Vector3 aux = contact.point;
+                spark.transform.position = aux;
+                if (energyCooldown <= 0f)
+                {
+                    modifyEnergy(-2);
+                    energyCooldown = 0.5f;
+
+                }
+                if (!spark.isPlaying) spark.Play();
+            }
+            else
+            {
+                modifyEnergy(-20);
+            }
         }
         Debug.Log("He colisionado en ...");
     }
@@ -56,6 +82,8 @@ public class MoveShip : MonoBehaviour {
         spark.Stop();
         currentYRotation = 0;
         hasMissile = true;
+        energy = 100f;
+        energyCooldown = 0.5f;
     }
 
     // Update is called once per frame
@@ -66,6 +94,8 @@ public class MoveShip : MonoBehaviour {
     }
     void Update()
     {
+        energyCooldown -= Time.deltaTime;
+       
         // fuerzas de friccion del motor (afectan a la fuerza del motor)
         float engineFrictionForce = frictionCoeff*speed; 
         if (engineForce > 0)

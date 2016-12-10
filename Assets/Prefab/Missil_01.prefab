@@ -43,7 +43,7 @@ GameObject:
   - 54: {fileID: 54000010258258510}
   m_Layer: 0
   m_Name: Missil_01
-  m_TagString: Untagged
+  m_TagString: misil
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
