@@ -11,6 +11,8 @@ EditorBuildSettings:
     path: Assets/Scenes/CircuitoPruebas.unity
   - enabled: 1
     path: Assets/Scenes/GameOver.unity
+  - enabled: 1
+    path: Assets/Scenes/SelectorCircuito.unity
   - enabled: 0
     path: Assets/Scenes/Inicial.unity
   - enabled: 0

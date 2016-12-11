@@ -14,7 +14,6 @@ public class MaxCameraRotation : MonoBehaviour {
     void LateUpdate () {
         float currentZ = player.transform.rotation.eulerAngles.z;
         if (currentZ > 180f) currentZ -= 360;
-        Debug.Log("rotacion Z " + currentZ);
         if (currentZ < -40f) currentZ = -40f;
         else if (currentZ > 40f) currentZ = 40f;
        

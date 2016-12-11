@@ -71,7 +71,7 @@ public class MoveShip : MonoBehaviour {
                 }
             }
         }
-        Debug.Log("He colisionado en ...");
+        //Debug.Log("He colisionado en ...");
     }
         // Use this for initialization
     void Start () {

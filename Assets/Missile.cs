@@ -10,13 +10,11 @@ public class Missile : MonoBehaviour {
 	void Start () {
         currentY = transform.eulerAngles.y;
         Destroy(gameObject, 20f);
-        Debug.Log("Hola en ...");
     }
 	
     void OnCollisionEnter(Collision collision)
     {
         GameObject obj = (GameObject)Instantiate(explosion, collision.transform.position, collision.transform.rotation);
-        Debug.Log("Misil He colisionado en ...");
         Destroy(gameObject);
     }
 
