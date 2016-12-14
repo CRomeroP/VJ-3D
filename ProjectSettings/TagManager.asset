@@ -8,6 +8,7 @@ TagManager:
   - misil
   - baldosaEnergia
   - baldosaCohete
+  - circuito
   layers:
   - Default
   - TransparentFX

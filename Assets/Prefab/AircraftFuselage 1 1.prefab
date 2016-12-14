@@ -288,7 +288,7 @@ Transform:
   m_GameObject: {fileID: 1000012461437228}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.26, y: 2.87, z: 1.57}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.02, y: 0.02, z: 0.02}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 4000010690454498}
@@ -301,10 +301,10 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012128981602}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.35547593, y: 7.991852, z: -149.97}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: -0, w: -0.7071068}
+  m_LocalPosition: {x: 271.03186, y: 22.33, z: 179}
+  m_LocalScale: {x: 0.02, y: 0.02, z: 0.02}
+  m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
   m_Children:
   - {fileID: 4000013793594864}
   - {fileID: 4000013616336710}
@@ -325,7 +325,7 @@ Transform:
   m_GameObject: {fileID: 1000012073642268}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 2.88, y: 4.39, z: -8.218}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.02, y: 0.02, z: 0.02}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 4000012620830510}
@@ -749,10 +749,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turnSpeed: 5
-  maxHeight: 10
+  maxHeight: 2
   verticalRotSpeed: 1
   turnRotSpeed: 50
-  engineForceStep: 5000
+  engineForceStep: 50
   maxZrotation: 60
   stepZRotation: 5
   airResistance: 0.1
@@ -764,6 +764,8 @@ MonoBehaviour:
   energy: 0
   currentRockets: 0
   maxRockets: 2
+  laps: 0
+  checkPointsPerLap: 5
   missile: {fileID: 1000013925539060, guid: 1390ac1038d52694da0312ab1f1dab74, type: 2}
 --- !u!114 &114000014016032276
 MonoBehaviour:
