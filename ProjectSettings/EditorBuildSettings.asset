@@ -17,7 +17,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Inicial.unity
   - enabled: 0
     path: Assets/Scenes/probandoCircuito.unity
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Circuito.unity
   - enabled: 0
     path: Assets/testParents.unity
