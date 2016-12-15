@@ -163,7 +163,8 @@
             <summary>
             Updates the tween.
             </summary>
-            <param name="p_totElapsed">
+            <param name="p_totE
+                   sed">
             The total elapsed time since startup (loops excluded).
             </param>
         </member>

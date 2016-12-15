@@ -16,6 +16,7 @@ public class MoveShip : MonoBehaviour
     public int currentRockets;
     public int maxRockets = 2;
     public int laps, checkPointsPerLap;
+    private float timeTurbo;
 
     private bool subir, subirMorro;
     private ParticleSystem spark;
@@ -111,6 +112,7 @@ public class MoveShip : MonoBehaviour
         rocketLaunchCooldown = 0f;
         currentChecks = 0;
         checkCooldown = 0f;
+        timeTurbo = 0;
     }
 
     private void addRocket()
@@ -148,7 +150,11 @@ public class MoveShip : MonoBehaviour
         if (acceleration > 0) acceleration -= accelerationResistance;
         else if (acceleration < 0) acceleration += accelerationResistance;
 
-        speed = Time.deltaTime * (acceleration - accelerationResistance) + speed;
+        speed = Time.deltaTime * (acceleration - accelerationResistance) + speed + (5*timeTurbo);
+        if (timeTurbo > 0)
+            timeTurbo -= Time.deltaTime;
+        if (timeTurbo < 0)
+            timeTurbo = 0;
 
 
         // giro
@@ -156,19 +162,13 @@ public class MoveShip : MonoBehaviour
         float zStep = stepZRotation * Time.deltaTime;
         if (Input.GetKey(KeyCode.RightArrow))
         {
-
-
-
             zRotation -= stepZRotation;
             if (zRotation < -maxZrotation) zRotation = -maxZrotation;
             if (zRotation > -maxZrotation)
                 transform.Rotate(0f, 0f, -stepZRotation);
         }
         else if (Input.GetKey(KeyCode.LeftArrow))
-        {
-
-
-
+        { 
             zRotation += stepZRotation;
             if (zRotation > maxZrotation) zRotation = maxZrotation;
             if (zRotation < maxZrotation)
@@ -228,7 +228,7 @@ public class MoveShip : MonoBehaviour
         //float currentYRotation = gameObject.transform.rotation.eulerAngles.y;
 
 
-        if (Physics.Raycast(ray, out hit, 10f) && hit.transform.tag != "muro"  && hit.transform.tag != "baldosaEnergia" && hit.transform.tag != "baldosaCohete")
+        if (Physics.Raycast(ray, out hit, 10f) && hit.transform.tag != "muro" && hit.transform.tag != "baldosaEnergia" && hit.transform.tag != "baldosaCohete")
         {
             gameObject.transform.position = new Vector3(hit.point.x, hit.point.y, hit.point.z);
             gameObject.transform.position += transform.up * maxHeight;
@@ -253,6 +253,10 @@ public class MoveShip : MonoBehaviour
         else if (hit.transform.tag == "baldosaCheck" && checkCooldown <= 0f)
         {
             checkPointPassed();
+        }
+        else if (hit.transform.tag == "baldosaTurbo")
+        {
+            timeTurbo = 3;
         }
     }
 }
