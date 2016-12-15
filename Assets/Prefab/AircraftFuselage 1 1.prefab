@@ -55,7 +55,7 @@ GameObject:
   - 92: {fileID: 92000011828823880}
   - 124: {fileID: 124000010865186426}
   - 81: {fileID: 81000013295608560}
-  - 114: {fileID: 114000014016032276}
+  - 114: {fileID: 114000010722804816}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -767,7 +767,7 @@ MonoBehaviour:
   laps: 0
   checkPointsPerLap: 5
   missile: {fileID: 1000013925539060, guid: 1390ac1038d52694da0312ab1f1dab74, type: 2}
---- !u!114 &114000014016032276
+--- !u!114 &114000010722804816
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

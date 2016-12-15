@@ -23,7 +23,6 @@ GameObject:
   - 92: {fileID: 92000013368625746}
   - 124: {fileID: 124000010561742508}
   - 81: {fileID: 81000011874773148}
-  - 114: {fileID: 114000011158260674}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -71,8 +70,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011539743622}
-  m_LocalRotation: {x: -0, y: -0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.99947, y: 168.00002, z: -323.9999}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 162, y: 274, z: 249}
   m_LocalScale: {x: 20, y: 20, z: 20}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -85,8 +84,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012568639622}
   m_LocalRotation: {x: 0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -69.8, y: 0, z: 747.1}
-  m_LocalScale: {x: 0.05000003, y: 0.05, z: 0.05000003}
+  m_LocalPosition: {x: 268.7, y: 24.5, z: 175.8}
+  m_LocalScale: {x: 0.005, y: 0.005, z: 0.005}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 4000012656336928}
@@ -112,7 +111,7 @@ Camera:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011539743622}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0.019607844}
@@ -191,7 +190,7 @@ AudioListener:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011539743622}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!92 &92000013368625746
 Behaviour:
   m_ObjectHideFlags: 1
@@ -213,7 +212,7 @@ MonoBehaviour:
   pathContainer: {fileID: 0}
   pathtype: 1
   onStart: 1
-  moveToPath: 1
+  moveToPath: 0
   closePath: 0
   orientToPath: 1
   local: 0
@@ -247,18 +246,6 @@ MonoBehaviour:
   maxRockets: 2
   maxHeight: 0
   missile: {fileID: 1000013925539060, guid: 1390ac1038d52694da0312ab1f1dab74, type: 2}
---- !u!114 &114000011158260674
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011539743622}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42ab325a47f7b2645b99cb7e30baf276, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
 --- !u!124 &124000010561742508
 Behaviour:
   m_ObjectHideFlags: 1
