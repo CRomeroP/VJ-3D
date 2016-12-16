@@ -63,7 +63,7 @@ public class MoveShip : MonoBehaviour
 
 
             // reproducir sonido de choque
-            if (collision.gameObject.tag != "misil")
+            if (collision.gameObject.tag == "muro")
             {
                 Vector3 aux = contact.point;
                 spark.transform.position = aux;
@@ -75,7 +75,7 @@ public class MoveShip : MonoBehaviour
                 }
                 if (!spark.isPlaying) spark.Play();
             }
-            else
+            else if (collision.gameObject.tag == "rocket")
             {
 
                 if (explosionCooldown <= 0f)
@@ -142,7 +142,7 @@ public class MoveShip : MonoBehaviour
         }
 
         // fuerzas de friccion del aire (afectan a la velocidad de la nave)
-        if (speed > maxSpeed) speed = maxSpeed;
+        if (speed > maxSpeed && timeTurbo == 0) speed = maxSpeed;
         float accelerationResistance = airResistance * speed * (speed / 2) / mass;
         float accelerationEngine = engineForce / mass;
 
@@ -228,7 +228,7 @@ public class MoveShip : MonoBehaviour
         //float currentYRotation = gameObject.transform.rotation.eulerAngles.y;
 
 
-        if (Physics.Raycast(ray, out hit, 10f) && hit.transform.tag != "muro" && hit.transform.tag != "baldosaEnergia" && hit.transform.tag != "baldosaCohete")
+        if (Physics.Raycast(ray, out hit, 40f) && hit.transform.tag != "muro" && hit.transform.tag != "baldosaEnergia" && hit.transform.tag != "baldosaCohete")
         {
             gameObject.transform.position = new Vector3(hit.point.x, hit.point.y, hit.point.z);
             gameObject.transform.position += transform.up * maxHeight;
@@ -236,12 +236,14 @@ public class MoveShip : MonoBehaviour
             gameObject.transform.up = hit.normal;
 
             // importante el orden
-            gameObject.transform.Rotate(0f, currentYRotation, 0f);
-            gameObject.transform.Rotate(0f, 0f, zRotation);
+            /*gameObject.transform.Rotate(0f, currentYRotation, 0f);
+            gameObject.transform.Rotate(0f, 0f, zRotation);*/
 
 
             Debug.DrawLine(ray.origin, hit.point, Color.red);
         }
+        gameObject.transform.Rotate(0f, currentYRotation, 0f);
+        gameObject.transform.Rotate(0f, 0f, zRotation);
         if (hit.transform.tag == "baldosaEnergia")
         {
             if (hit.collider.GetComponent<BaldosaScript>().usar()) modifyEnergy(20);
